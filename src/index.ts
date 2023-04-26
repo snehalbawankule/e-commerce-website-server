@@ -14,12 +14,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 userRoute(app);
-articleRoute(app);
-commentRoute(app);
-likeRoute(app);
-/*sequelize
+// articleRoute(app);
+// commentRoute(app);
+// likeRoute(app);
+sequelize
   .sync({ alter: true })
-  .then((result) => console.log("database sync successfully"));*/
+  .then((result) => console.log("database sync successfully"));
 app.listen(3001, function () {
   console.log("Node app is running on port 3001");
 });

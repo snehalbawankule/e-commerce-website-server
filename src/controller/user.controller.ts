@@ -13,8 +13,8 @@ const getAll = async (req: any, res: any) => {
 
 const addUser = async (req: any, res: any) => {
   try {
-    const { email, name, profile, password } = req.body;
-    const user = await createUser(email, name, profile, password);
+    const { name, email, password } = req.body;
+    const user = await createUser(name, email, password);
     return res.json(user);
   } catch (error) {
     console.error(error);
@@ -25,12 +25,16 @@ const addUser = async (req: any, res: any) => {
 const checkUser = async (req: any, res: any) => {
   try {
     const { email, password } = req.body;
-
+    console.log("password" + password);
     const user = await userCheck(email);
     if (!user) {
       return res.send({ message: "User not found" });
     }
-    const isMatch = await bcrypt.compare(password, user?.dataValues.password);
+    const isMatch = await bcrypt.compare(
+      "$2b$10$diEzJqtO0FZOCU1bX7M5x.ow4qBkA9PhZM/2CPKnD73e9g5ckB8Cm",
+      user?.dataValues.password
+    );
+    console.log(password, user?.dataValues.password);
     if (!isMatch) {
       return res.send({ message: "Invalid password" });
     }

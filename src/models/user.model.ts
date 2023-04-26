@@ -13,10 +13,6 @@ const UserModel = sequelize.define(
       type: DataTypes.STRING,
       primaryKey: true,
     },
-    profile: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
