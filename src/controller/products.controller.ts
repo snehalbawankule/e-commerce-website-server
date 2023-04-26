@@ -22,6 +22,7 @@ const addProduct = async (req: any, res: any) => {
       name,
       title,
       description,
+      image,
       gender,
       brand,
       category,
@@ -29,11 +30,11 @@ const addProduct = async (req: any, res: any) => {
       actualPrice,
       discount,
     } = req.body;
-    console.log(req.body);
     const Article = await createProduct(
       name,
       title,
       description,
+      image,
       gender,
       brand,
       category,
@@ -55,6 +56,7 @@ const updateProducts = async (req: any, res: any) => {
       name,
       title,
       description,
+      image,
       gender,
       brand,
       category,
@@ -67,6 +69,7 @@ const updateProducts = async (req: any, res: any) => {
       name,
       title,
       description,
+      image,
       gender,
       brand,
       category,

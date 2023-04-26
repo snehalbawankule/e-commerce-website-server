@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../util/connection.util";
-import { ArticleModel } from "./product.model";
+import { ProductModel } from "./product.model";
 
 const LikeModel = sequelize.define(
   "like",
@@ -20,8 +20,8 @@ const LikeModel = sequelize.define(
     timestamps: true,
   }
 );
-ArticleModel.hasMany(LikeModel, { foreignKey: "id", as: "likes" });
-LikeModel.belongsTo(ArticleModel, {
+ProductModel.hasMany(LikeModel, { foreignKey: "id", as: "likes" });
+LikeModel.belongsTo(ProductModel, {
   foreignKey: "id",
   as: "article",
 });

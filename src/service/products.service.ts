@@ -8,13 +8,13 @@ const getAllProduct = async (
 ) => {
   const limit = size * 1;
   const offset = (page - 1) * limit;
-  const articles = await ProductModel.findAll({
+  const category = await ProductModel.findAll({
     nest: true,
     order: [[sortBy, sortOrder]],
     offset,
     limit,
   });
-  return articles;
+  return category;
 };
 
 const updateProduct = async (
@@ -22,6 +22,7 @@ const updateProduct = async (
   name: string,
   title: string,
   description: string,
+  image: string,
   gender: string,
   brand: string,
   category: string,
@@ -34,6 +35,7 @@ const updateProduct = async (
       name,
       title,
       description,
+      image,
       gender,
       brand,
       category,
@@ -51,6 +53,7 @@ const createProduct = async (
   name: string,
   title: string,
   description: string,
+  image: string,
   gender: string,
   brand: string,
   category: string,
@@ -62,6 +65,7 @@ const createProduct = async (
     name,
     title,
     description,
+    image,
     gender,
     brand,
     category,

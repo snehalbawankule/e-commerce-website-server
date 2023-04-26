@@ -9,14 +9,16 @@ import { sequelize } from "./util/connection.util";
 import { productRoute } from "./route/products.route";
 import { commentRoute } from "./route/comments.route";
 import { likeRoute } from "./route/likes.route";
+import { categoryRoute } from "./route/category.route";
+import { subCategoryRoute } from "./route/sub-category.route";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 userRoute(app);
 productRoute(app);
-// commentRoute(app);
-// likeRoute(app);
+categoryRoute(app);
+subCategoryRoute(app);
 sequelize
   .sync({ alter: true })
   .then((result) => console.log("database sync successfully"));
