@@ -1,4 +1,4 @@
-import { ArticleModel } from "../models/articles.model";
+import { ArticleModel } from "../models/product.model";
 import { CommentModel } from "../models/comments.model";
 
 const getAllComments = async () => {

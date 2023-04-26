@@ -6,7 +6,7 @@ app.use(express.json());
 import bodyParser from "body-parser";
 import { userRoute } from "./route/user.route";
 import { sequelize } from "./util/connection.util";
-import { articleRoute } from "./route/articles.route";
+import { productRoute } from "./route/products.route";
 import { commentRoute } from "./route/comments.route";
 import { likeRoute } from "./route/likes.route";
 app.use(bodyParser.json());
@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 userRoute(app);
-// articleRoute(app);
+productRoute(app);
 // commentRoute(app);
 // likeRoute(app);
 sequelize

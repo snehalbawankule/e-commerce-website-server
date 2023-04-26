@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../util/connection.util";
-import { ArticleModel } from "./articles.model";
+import { ArticleModel } from "./product.model";
 
 const CommentModel = sequelize.define(
   "comment",
