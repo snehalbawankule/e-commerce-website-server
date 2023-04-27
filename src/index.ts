@@ -11,11 +11,13 @@ import { commentRoute } from "./route/comments.route";
 import { likeRoute } from "./route/likes.route";
 import { categoryRoute } from "./route/category.route";
 import { subCategoryRoute } from "./route/sub-category.route";
+import { brandRoute } from "./route/brand.route";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 userRoute(app);
+brandRoute(app);
 productRoute(app);
 categoryRoute(app);
 subCategoryRoute(app);
