@@ -12,12 +12,14 @@ import { likeRoute } from "./route/likes.route";
 import { categoryRoute } from "./route/category.route";
 import { subCategoryRoute } from "./route/sub-category.route";
 import { brandRoute } from "./route/brand.route";
+import { posterRoute } from "./route/poster.route";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 userRoute(app);
 brandRoute(app);
+posterRoute(app);
 productRoute(app);
 categoryRoute(app);
 subCategoryRoute(app);

@@ -30,7 +30,7 @@ const addProduct = async (req: any, res: any) => {
       actualPrice,
       discount,
     } = req.body;
-    const Article = await createProduct(
+    const Category = await createProduct(
       name,
       title,
       description,
@@ -42,7 +42,7 @@ const addProduct = async (req: any, res: any) => {
       actualPrice,
       discount
     );
-    return res.json(Article);
+    return res.json(Category);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
