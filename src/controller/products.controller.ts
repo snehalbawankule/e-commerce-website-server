@@ -2,11 +2,24 @@ import {
   getAllProduct,
   createProduct,
   updateProduct,
+  getSearchedProduct,
 } from "../service/products.service";
 
 const getAllProducts = async (req: any, res: any, next: any) => {
   console.log(req.query);
   getAllProduct(req.query.page, req.query.size, req.query.sort, req.query.order)
+    .then((result) => {
+      res.json(result);
+      next;
+    })
+    .catch((err) => {
+      res.json({ err }).status(500);
+    });
+};
+
+const getSearchProducts = async (req: any, res: any, next: any) => {
+  console.log(req.query);
+  getSearchedProduct(req.query.size, req.query.q)
     .then((result) => {
       res.json(result);
       next;
@@ -84,4 +97,4 @@ const updateProducts = async (req: any, res: any) => {
   }
 };
 
-export { getAllProducts, addProduct, updateProducts };
+export { getAllProducts, addProduct, getSearchProducts, updateProducts };

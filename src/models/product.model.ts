@@ -17,10 +17,11 @@ const ProductModel = sequelize.define(
     },
     title: {
       type: DataTypes.STRING,
+
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(700),
       allowNull: false,
     },
     image: {

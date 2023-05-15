@@ -23,4 +23,8 @@ const createUser = async (
   return user;
 };
 
-export { getAllUsers, createUser, userCheck };
+const forgetPass = async (email: string) => {
+  return UserModel.findOne({ where: { email } });
+};
+
+export { getAllUsers, createUser, userCheck, forgetPass };

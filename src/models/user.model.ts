@@ -17,6 +17,10 @@ const UserModel = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    resetToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     timestamps: true,

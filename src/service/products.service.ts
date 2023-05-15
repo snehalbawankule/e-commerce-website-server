@@ -1,4 +1,5 @@
 import { ProductModel } from "../models/product.model";
+import { sequelize } from "../util/connection.util";
 
 const getAllProduct = async (
   page: number,
@@ -13,6 +14,40 @@ const getAllProduct = async (
     order: [[sortBy, sortOrder]],
     offset,
     limit,
+  });
+  return category;
+};
+
+const getSearchedProduct = async (size: number, q: any) => {
+  const limit = size * 1;
+  const category = await ProductModel.findAll({
+    nest: true,
+    limit,
+    attributes: {
+      exclude: [
+        "title",
+        "description",
+        "image",
+        "gender",
+        "brand",
+        "category",
+        "subCategory",
+        "actualPrice",
+        "discount",
+        "discountPrice",
+        "createdAt",
+        "updatedAt",
+      ],
+    },
+    where: {
+      name: sequelize.where(
+        sequelize.fn("LOWER", sequelize.col("name")),
+        "LIKE",
+        "%" + q + "%"
+      ),
+    },
+    // [Op.iLike]: `%${request.body.query}%`
+    // where: { q },
   });
   return category;
 };
@@ -76,4 +111,4 @@ const createProduct = async (
 
   return product;
 };
-export { getAllProduct, createProduct, updateProduct };
+export { getAllProduct, createProduct, getSearchedProduct, updateProduct };

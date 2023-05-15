@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../util/connection.util";
-import { ArticleModel } from "./product.model";
+// import { ArticleModel } from "./product.model";
 
 const CommentModel = sequelize.define(
   "comment",
@@ -43,10 +43,10 @@ const CommentModel = sequelize.define(
     timestamps: true,
   }
 );
-ArticleModel.hasMany(CommentModel, { foreignKey: "id", as: "comments" });
-CommentModel.belongsTo(ArticleModel, {
-  foreignKey: "id",
-  as: "article",
-});
+// ArticleModel.hasMany(CommentModel, { foreignKey: "id", as: "comments" });
+// CommentModel.belongsTo(ArticleModel, {
+//   foreignKey: "id",
+//   as: "article",
+// });
 
 export { CommentModel };

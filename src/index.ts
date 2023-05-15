@@ -13,10 +13,14 @@ import { categoryRoute } from "./route/category.route";
 import { subCategoryRoute } from "./route/sub-category.route";
 import { brandRoute } from "./route/brand.route";
 import { posterRoute } from "./route/poster.route";
+import { wishlistRoute } from "./route/wishlist.route";
+import { expRoute } from "./route/exp.route";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+expRoute(app);
+wishlistRoute(app);
 userRoute(app);
 brandRoute(app);
 posterRoute(app);
