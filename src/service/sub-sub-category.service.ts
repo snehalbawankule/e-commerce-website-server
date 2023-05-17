@@ -1,4 +1,4 @@
-import { SubCategoryModel } from "../models/sub-category.model";
+import { SubSubCategoryModel } from "../models/sub-sub-category.model";
 
 const getAllSubCategories = async (
   page: number,
@@ -8,7 +8,7 @@ const getAllSubCategories = async (
 ) => {
   const limit = size * 1;
   const offset = (page - 1) * limit;
-  const category = await SubCategoryModel.findAll({
+  const category = await SubSubCategoryModel.findAll({
     nest: true,
     order: [[sortBy, sortOrder]],
     offset,
@@ -19,12 +19,12 @@ const getAllSubCategories = async (
 
 const updateSubCategories = async (
   id: any,
-  categoryId: string,
+  subcategoryId: string,
   name: string
 ) => {
-  const updateCat = await SubCategoryModel.update(
+  const updateCat = await SubSubCategoryModel.update(
     {
-      categoryId,
+      subcategoryId,
       name,
     },
     { where: { id } }
@@ -34,11 +34,11 @@ const updateSubCategories = async (
 };
 
 const createSubCategory = async (
-  categoryId: string,
+  subCategoryId: string,
   name: string
 ): Promise<any> => {
-  const category = await SubCategoryModel.create({
-    categoryId,
+  const category = await SubSubCategoryModel.create({
+    subCategoryId,
     name,
   });
 

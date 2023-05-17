@@ -2,11 +2,11 @@ import {
   getAllProduct,
   createProduct,
   updateProduct,
+  getCategoryProduct,
   getSearchedProduct,
 } from "../service/products.service";
 
 const getAllProducts = async (req: any, res: any, next: any) => {
-  console.log(req.query);
   getAllProduct(req.query.page, req.query.size, req.query.sort, req.query.order)
     .then((result) => {
       res.json(result);
@@ -17,8 +17,23 @@ const getAllProducts = async (req: any, res: any, next: any) => {
     });
 };
 
+const getCategoryProducts = async (req: any, res: any, next: any) => {
+  getCategoryProduct(
+    req.query.page,
+    req.query.size,
+    req.query.sort,
+    req.query.order,
+    req.query.category
+  )
+    .then((result) => {
+      res.json(result);
+      next;
+    })
+    .catch((err) => {
+      res.json({ err }).status(500);
+    });
+};
 const getSearchProducts = async (req: any, res: any, next: any) => {
-  console.log(req.query);
   getSearchedProduct(req.query.size, req.query.q)
     .then((result) => {
       res.json(result);
@@ -40,6 +55,7 @@ const addProduct = async (req: any, res: any) => {
       brand,
       category,
       subCategory,
+      sub_subCategory,
       actualPrice,
       discount,
     } = req.body;
@@ -52,6 +68,7 @@ const addProduct = async (req: any, res: any) => {
       brand,
       category,
       subCategory,
+      sub_subCategory,
       actualPrice,
       discount
     );
@@ -97,4 +114,10 @@ const updateProducts = async (req: any, res: any) => {
   }
 };
 
-export { getAllProducts, addProduct, getSearchProducts, updateProducts };
+export {
+  getAllProducts,
+  getCategoryProducts,
+  addProduct,
+  getSearchProducts,
+  updateProducts,
+};

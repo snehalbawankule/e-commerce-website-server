@@ -2,7 +2,7 @@ import {
   getAllSubCategories,
   createSubCategory,
   updateSubCategories,
-} from "../service/sub-category.service";
+} from "../service/sub-sub-category.service";
 
 const getAllSubCategory = async (req: any, res: any, next: any) => {
   getAllSubCategories(
@@ -22,8 +22,8 @@ const getAllSubCategory = async (req: any, res: any, next: any) => {
 
 const addSubCategory = async (req: any, res: any) => {
   try {
-    const { categoryId, name } = req.body;
-    const Category = await createSubCategory(categoryId, name);
+    const { subCategoryId, name } = req.body;
+    const Category = await createSubCategory(subCategoryId, name);
     return res.json(Category);
   } catch (error) {
     console.error(error);

@@ -17,7 +17,24 @@ const getAllProduct = async (
   });
   return category;
 };
-
+const getCategoryProduct = async (
+  page: number,
+  size: number,
+  sortBy: any,
+  sortOrder: any,
+  category: any
+) => {
+  const limit = size * 1;
+  const offset = (page - 1) * limit;
+  const product = await ProductModel.findAll({
+    nest: true,
+    where: [{ category }],
+    order: [[sortBy, sortOrder]],
+    offset,
+    limit,
+  });
+  return product;
+};
 const getSearchedProduct = async (size: number, q: any) => {
   const limit = size * 1;
   const category = await ProductModel.findAll({
@@ -93,6 +110,7 @@ const createProduct = async (
   brand: string,
   category: string,
   subCategory: string,
+  sub_subCategory: string,
   actualPrice: number,
   discount: number
 ): Promise<any> => {
@@ -105,10 +123,17 @@ const createProduct = async (
     brand,
     category,
     subCategory,
+    sub_subCategory,
     actualPrice,
     discount,
   });
 
   return product;
 };
-export { getAllProduct, createProduct, getSearchedProduct, updateProduct };
+export {
+  getAllProduct,
+  getCategoryProduct,
+  createProduct,
+  getSearchedProduct,
+  updateProduct,
+};

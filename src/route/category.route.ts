@@ -1,12 +1,16 @@
 import {
-  getAllCategory,
+  getAllCategories,
   addCategory,
+  getCategory,
   updateCategory,
+  getAllCategoriesWithoutname,
 } from "../controller/category.controller";
 import { Express } from "express";
 const categoryRoute = (app: Express) => {
-  app.get("/getcategory", getAllCategory);
-  app.post("/postcategory", addCategory);
-  app.post("/updatecategory", updateCategory);
+  app.get("/get-category", getCategory);
+  app.post("/post-category", addCategory);
+  app.post("/update-category", updateCategory);
+  app.get("/get-all-category", getAllCategories);
+  app.get("/get-all-cat", getAllCategoriesWithoutname);
 };
 export { categoryRoute };

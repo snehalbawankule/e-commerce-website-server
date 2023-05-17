@@ -1,6 +1,7 @@
 import {
   getAllProducts,
   addProduct,
+  getCategoryProducts,
   getSearchProducts,
   updateProducts,
 } from "../controller/products.controller";
@@ -10,5 +11,6 @@ const productRoute = (app: Express) => {
   app.get("/getproducts/search", getSearchProducts);
   app.post("/postproduct", addProduct);
   app.post("/updateproduct", updateProducts);
+  app.get("/get-category-products", getCategoryProducts);
 };
 export { productRoute };

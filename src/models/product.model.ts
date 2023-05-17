@@ -44,6 +44,10 @@ const ProductModel = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    sub_subCategory: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     actualPrice: {
       type: DataTypes.INTEGER,
       allowNull: false,

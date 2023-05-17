@@ -1,15 +1,43 @@
 import {
-  getAllCategories,
+  getCategories,
   createCategory,
   updateCategories,
+  getAllCategory,
+  getAllCategoryWithoutName,
 } from "../service/category.service";
 
-const getAllCategory = async (req: any, res: any, next: any) => {
-  getAllCategories(
+const getCategory = async (req: any, res: any, next: any) => {
+  getCategories(req.query.page, req.query.size, req.query.sort, req.query.order)
+    .then((result) => {
+      res.json(result);
+      next;
+    })
+    .catch((err) => {
+      res.json({ err }).status(500);
+    });
+};
+const getAllCategoriesWithoutname = async (req: any, res: any, next: any) => {
+  getAllCategoryWithoutName(
     req.query.page,
     req.query.size,
     req.query.sort,
     req.query.order
+  )
+    .then((result) => {
+      res.json(result);
+      next;
+    })
+    .catch((err) => {
+      res.json({ err }).status(500);
+    });
+};
+const getAllCategories = async (req: any, res: any, next: any) => {
+  getAllCategory(
+    req.query.page,
+    req.query.size,
+    req.query.sort,
+    req.query.order,
+    req.query.name
   )
     .then((result) => {
       res.json(result);
@@ -42,4 +70,10 @@ const updateCategory = async (req: any, res: any) => {
   }
 };
 
-export { getAllCategory, addCategory, updateCategory };
+export {
+  getCategory,
+  getAllCategories,
+  getAllCategoriesWithoutname,
+  addCategory,
+  updateCategory,
+};

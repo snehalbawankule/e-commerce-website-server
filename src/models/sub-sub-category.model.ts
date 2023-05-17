@@ -1,9 +1,9 @@
 import { sequelize } from "../util/connection.util";
 import { Sequelize, DataTypes } from "sequelize";
 import { randomUUID } from "crypto";
-import { CategoryModel } from "./category.model";
-const SubCategoryModel = sequelize.define(
-  "sub_category",
+import { SubCategoryModel } from "./sub-category.model";
+const SubSubCategoryModel = sequelize.define(
+  "sub_sub_category",
   {
     id: {
       type: DataTypes.UUID,
@@ -21,7 +21,7 @@ const SubCategoryModel = sequelize.define(
   }
 );
 
-export { SubCategoryModel };
+export { SubSubCategoryModel };
 
-CategoryModel.hasMany(SubCategoryModel);
-SubCategoryModel.belongsTo(CategoryModel);
+SubCategoryModel.hasMany(SubSubCategoryModel);
+SubSubCategoryModel.belongsTo(SubCategoryModel);
