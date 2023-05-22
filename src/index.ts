@@ -15,7 +15,7 @@ import { brandRoute } from "./route/brand.route";
 import { posterRoute } from "./route/poster.route";
 import { wishlistRoute } from "./route/wishlist.route";
 import { subSubCategoryRoute } from "./route/sub-sub-category.route";
-
+import { cartRoute } from "./route/cart.route";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,6 +28,7 @@ productRoute(app);
 categoryRoute(app);
 subCategoryRoute(app);
 subSubCategoryRoute(app);
+cartRoute(app);
 sequelize
   .sync({ alter: true })
   .then((result) => console.log("database sync successfully"));

@@ -1,6 +1,6 @@
 import { ProductModel } from "../models/product.model";
 import { sequelize } from "../util/connection.util";
-
+const { Op } = require("sequelize");
 const getAllProduct = async (
   page: number,
   size: number,
@@ -35,6 +35,65 @@ const getCategoryProduct = async (
   });
   return product;
 };
+
+const getSubCategoryProduct = async (
+  page: number,
+  size: number,
+  sortBy: any,
+  sortOrder: any,
+  category: any,
+  subCategory: any
+) => {
+  const limit = size * 1;
+  const offset = (page - 1) * limit;
+  const product = await ProductModel.findAll({
+    nest: true,
+    where: [
+      {
+        category,
+        subCategory: {
+          [Op.like]: `%${subCategory}%`,
+        },
+      },
+    ],
+    order: [[sortBy, sortOrder]],
+    offset,
+    limit,
+  });
+  return product;
+};
+const getSubSubCategoryProduct = async (
+  page: number,
+  size: number,
+  sortBy: any,
+  sortOrder: any,
+  category: any,
+  subCategory: any,
+  sub_subCategory: any
+) => {
+  const limit = size * 1;
+  const offset = (page - 1) * limit;
+  const product = await ProductModel.findAll({
+    nest: true,
+
+    where: [
+      {
+        category,
+        subCategory: {
+          [Op.like]: `%${subCategory}%`,
+        },
+        sub_subCategory: {
+          [Op.like]: `%${sub_subCategory}%`,
+        },
+      },
+    ],
+    order: [[sortBy, sortOrder]],
+    offset,
+    limit,
+  });
+  return product;
+};
+
 const getSearchedProduct = async (size: number, q: any) => {
   const limit = size * 1;
   const category = await ProductModel.findAll({
@@ -63,12 +122,19 @@ const getSearchedProduct = async (size: number, q: any) => {
         "%" + q + "%"
       ),
     },
-    // [Op.iLike]: `%${request.body.query}%`
-    // where: { q },
   });
   return category;
 };
 
+const getProductById = async (id: any) => {
+  const category = await ProductModel.findOne({
+    nest: true,
+    where: {
+      id,
+    },
+  });
+  return category;
+};
 const updateProduct = async (
   id: any,
   name: string,
@@ -136,4 +202,7 @@ export {
   createProduct,
   getSearchedProduct,
   updateProduct,
+  getSubSubCategoryProduct,
+  getSubCategoryProduct,
+  getProductById,
 };

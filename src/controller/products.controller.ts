@@ -2,8 +2,11 @@ import {
   getAllProduct,
   createProduct,
   updateProduct,
+  getSubCategoryProduct,
   getCategoryProduct,
   getSearchedProduct,
+  getSubSubCategoryProduct,
+  getProductById,
 } from "../service/products.service";
 
 const getAllProducts = async (req: any, res: any, next: any) => {
@@ -24,6 +27,52 @@ const getCategoryProducts = async (req: any, res: any, next: any) => {
     req.query.sort,
     req.query.order,
     req.query.category
+  )
+    .then((result) => {
+      res.json(result);
+      next;
+    })
+    .catch((err) => {
+      res.json({ err }).status(500);
+    });
+};
+const getProductsById = async (req: any, res: any, next: any) => {
+  getProductById(req.query.id)
+    .then((result) => {
+      res.json(result);
+      next;
+    })
+    .catch((err) => {
+      res.json({ err }).status(500);
+    });
+};
+
+const getSubCategoryProducts = async (req: any, res: any, next: any) => {
+  getSubCategoryProduct(
+    req.query.page,
+    req.query.size,
+    req.query.sort,
+    req.query.order,
+    req.query.category,
+    req.query.subCategory
+  )
+    .then((result) => {
+      res.json(result);
+      next;
+    })
+    .catch((err) => {
+      res.json({ err }).status(500);
+    });
+};
+const getSubSubCategoryProducts = async (req: any, res: any, next: any) => {
+  getSubSubCategoryProduct(
+    req.query.page,
+    req.query.size,
+    req.query.sort,
+    req.query.order,
+    req.query.category,
+    req.query.subCategory,
+    req.query.sub_subCategory
   )
     .then((result) => {
       res.json(result);
@@ -116,8 +165,11 @@ const updateProducts = async (req: any, res: any) => {
 
 export {
   getAllProducts,
+  getSubCategoryProducts,
   getCategoryProducts,
   addProduct,
   getSearchProducts,
   updateProducts,
+  getSubSubCategoryProducts,
+  getProductsById,
 };

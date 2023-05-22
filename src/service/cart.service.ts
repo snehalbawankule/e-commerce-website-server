@@ -1,9 +1,9 @@
 import { ProductModel } from "../models/product.model";
 import { UserModel } from "../models/user.model";
-import { WishlistModel } from "../models/wishlist.model";
+import { CartModel } from "../models/cart.model";
 
-//Used for get wishlist for single product and multiple users
-const getAllSingleProductWishlist = async (
+//Used for get cart for single product and multiple users
+const getAllSingleProductCart = async (
   page: number,
   size: number,
   sortBy: any,
@@ -13,7 +13,7 @@ const getAllSingleProductWishlist = async (
   const limit = size * 1;
   const offset = (page - 1) * limit;
 
-  const category = await WishlistModel.findAll({
+  const category = await CartModel.findAll({
     nest: true,
     where: {
       productId,
@@ -26,8 +26,8 @@ const getAllSingleProductWishlist = async (
   return category;
 };
 
-//Used for get wishlist for single user and multiple products
-const getAllCurrentUserWishList = async (
+//Used for get cart for single user and multiple products
+const getCurrentUserCart = async (
   page: number,
   size: number,
   sortBy: any,
@@ -37,7 +37,7 @@ const getAllCurrentUserWishList = async (
   const limit = size * 1;
   const offset = (page - 1) * limit;
 
-  const category = await WishlistModel.findAll({
+  const category = await CartModel.findAll({
     nest: true,
     where: {
       userEmail,
@@ -48,18 +48,17 @@ const getAllCurrentUserWishList = async (
     offset,
     limit,
   });
-
   return category;
 };
 
-const updateWishlist = async (
+const updateCart = async (
   product_id: string,
   userName: string,
   quantity: number,
   size: string,
   color: string
 ) => {
-  const updatePro = await WishlistModel.update(
+  const updatePro = await CartModel.update(
     {
       product_id,
       userName,
@@ -73,14 +72,14 @@ const updateWishlist = async (
   return updatePro;
 };
 
-const createWishlist = async (
+const createCart = async (
   userEmail: string,
   productId: string,
   quantity: number,
   size: string,
   color: string
 ): Promise<any> => {
-  const wishlist = await WishlistModel.create({
+  const cart = await CartModel.create({
     userEmail,
     productId,
     quantity,
@@ -88,11 +87,10 @@ const createWishlist = async (
     color,
   });
 
-  return wishlist;
+  return cart;
 };
-
-const removeWishlist = async (id: string): Promise<any> => {
-  const user = await WishlistModel.destroy({
+const removeCart = async (id: string): Promise<any> => {
+  const user = await CartModel.destroy({
     where: {
       id,
     },
@@ -101,9 +99,9 @@ const removeWishlist = async (id: string): Promise<any> => {
   return user;
 };
 export {
-  getAllSingleProductWishlist,
-  getAllCurrentUserWishList,
-  createWishlist,
-  updateWishlist,
-  removeWishlist,
+  getAllSingleProductCart,
+  getCurrentUserCart,
+  createCart,
+  updateCart,
+  removeCart,
 };

@@ -1,14 +1,14 @@
 import {
-  getAllCurrentUserWishList,
-  createWishlist,
-  updateWishlist,
-  getAllSingleProductWishlist,
-  removeWishlist,
-} from "../service/wishlist.service";
+  getCurrentUserCart,
+  createCart,
+  updateCart,
+  getAllSingleProductCart,
+  removeCart,
+} from "../service/cart.service";
 
-const getAllWishlists = async (req: any, res: any, next: any) => {
+const getAllCarts = async (req: any, res: any, next: any) => {
   console.log(req.query);
-  getAllSingleProductWishlist(
+  getAllSingleProductCart(
     req.query.page,
     req.query.size,
     req.query.sort,
@@ -24,9 +24,9 @@ const getAllWishlists = async (req: any, res: any, next: any) => {
     });
 };
 
-const getAllCurrentUserWishLists = async (req: any, res: any, next: any) => {
+const getCurrentUserCarts = async (req: any, res: any, next: any) => {
   console.log(req.query);
-  getAllCurrentUserWishList(
+  getCurrentUserCart(
     req.query.page,
     req.query.size,
     req.query.sort,
@@ -41,10 +41,10 @@ const getAllCurrentUserWishLists = async (req: any, res: any, next: any) => {
       res.json({ err }).status(500);
     });
 };
-const addWishlist = async (req: any, res: any) => {
+const addCart = async (req: any, res: any) => {
   try {
     const { userEmail, productId, quantity, size, color } = req.body;
-    const Category = await createWishlist(
+    const Category = await createCart(
       userEmail,
       productId,
       quantity,
@@ -58,10 +58,10 @@ const addWishlist = async (req: any, res: any) => {
   }
 };
 
-const updateWishlists = async (req: any, res: any) => {
+const updateCarts = async (req: any, res: any) => {
   try {
     const { product_id, userName, quantity, size, color } = req.body;
-    const result = await updateWishlist(
+    const result = await updateCart(
       product_id,
       userName,
       quantity,
@@ -74,10 +74,9 @@ const updateWishlists = async (req: any, res: any) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
-
-const removeWishlists = async (req: any, res: any, next: any) => {
+const removeCarts = async (req: any, res: any, next: any) => {
   console.log(req.query);
-  removeWishlist(req.query.id)
+  removeCart(req.query.id)
     .then((result) => {
       res.json(result);
       next;
@@ -87,10 +86,4 @@ const removeWishlists = async (req: any, res: any, next: any) => {
     });
 };
 
-export {
-  getAllWishlists,
-  addWishlist,
-  getAllCurrentUserWishLists,
-  updateWishlists,
-  removeWishlists,
-};
+export { getAllCarts, addCart, getCurrentUserCarts, updateCarts, removeCarts };

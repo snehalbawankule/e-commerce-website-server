@@ -3,6 +3,7 @@ import {
   addWishlist,
   updateWishlists,
   getAllCurrentUserWishLists,
+  removeWishlists,
 } from "../controller/wishlist.controller";
 import { Express } from "express";
 const wishlistRoute = (app: Express) => {
@@ -10,5 +11,6 @@ const wishlistRoute = (app: Express) => {
   app.post("/postwishlist", addWishlist);
   app.post("/updatewishlist", updateWishlists);
   app.get("/getCurrent", getAllCurrentUserWishLists);
+  app.delete("/removewishlist", removeWishlists);
 };
 export { wishlistRoute };
