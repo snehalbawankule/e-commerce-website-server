@@ -15,8 +15,8 @@ const getAll = async (req: any, res: any) => {
 
 const addUser = async (req: any, res: any) => {
   try {
-    const { name, email, password } = req.body;
-    const user = await createUser(name, email, password);
+    const { firstname, lastname, email, password } = req.body;
+    const user = await createUser(firstname, lastname, email, password);
     return res.json(user);
   } catch (error) {
     console.error(error);
@@ -24,7 +24,7 @@ const addUser = async (req: any, res: any) => {
   }
 };
 
-const checkUser = async (req: any, res: any) => {
+const validateUser = async (req: any, res: any) => {
   try {
     const { email, password } = req.body;
     const user = await userCheck(email);
@@ -35,6 +35,20 @@ const checkUser = async (req: any, res: any) => {
     console.log(password, user?.dataValues.password);
     if (isMatch) {
       return res.send({ message: "Invalid password" });
+    }
+    return res.status(200).send(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+const checkUser = async (req: any, res: any) => {
+  try {
+    const { email } = req.body;
+    const user = await userCheck(email);
+    if (!user) {
+      return res.send({ message: "User not found" });
     }
     return res.status(200).send(user);
   } catch (error) {
@@ -73,4 +87,4 @@ const forgetPassword = async (req: any, res: any) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
-export { getAll, addUser, checkUser, forgetPassword };
+export { getAll, addUser, checkUser, validateUser, forgetPassword };

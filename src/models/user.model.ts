@@ -1,17 +1,28 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../util/connection.util";
 const bcrypt = require("bcrypt");
+import { randomUUID } from "crypto";
 
 const UserModel = sequelize.define(
   "user",
   {
-    name: {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: randomUUID,
+      primaryKey: true,
+      allowNull: false,
+    },
+    firstname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
-      primaryKey: true,
+      unique: true,
     },
     password: {
       type: DataTypes.STRING,

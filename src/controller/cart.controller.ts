@@ -31,7 +31,7 @@ const getCurrentUserCarts = async (req: any, res: any, next: any) => {
     req.query.size,
     req.query.sort,
     req.query.order,
-    req.query.userEmail
+    req.query.userId
   )
     .then((result) => {
       res.json(result);

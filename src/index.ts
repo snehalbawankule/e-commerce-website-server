@@ -16,11 +16,16 @@ import { posterRoute } from "./route/poster.route";
 import { wishlistRoute } from "./route/wishlist.route";
 import { subSubCategoryRoute } from "./route/sub-sub-category.route";
 import { cartRoute } from "./route/cart.route";
+import { helpCenterRoute } from "./route/helpcenter.route";
+import { faqsRoute } from "./route/faqs.route";
+import { userAddressRoute } from "./route/user-address.route";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 wishlistRoute(app);
+helpCenterRoute(app);
+faqsRoute(app);
 userRoute(app);
 brandRoute(app);
 posterRoute(app);
@@ -29,6 +34,7 @@ categoryRoute(app);
 subCategoryRoute(app);
 subSubCategoryRoute(app);
 cartRoute(app);
+userAddressRoute(app);
 sequelize
   .sync({ alter: true })
   .then((result) => console.log("database sync successfully"));

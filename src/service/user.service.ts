@@ -8,15 +8,16 @@ const userCheck = async (email: string) => {
   return UserModel.findOne({ where: { email: email } });
 };
 const createUser = async (
-  name: string,
+  firstname: string,
+  lastname: string,
   email: string,
 
   password: string
 ): Promise<any> => {
   const user = await UserModel.create({
-    name,
+    firstname,
+    lastname,
     email,
-
     password,
   });
 

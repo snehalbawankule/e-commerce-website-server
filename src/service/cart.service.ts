@@ -32,7 +32,7 @@ const getCurrentUserCart = async (
   size: number,
   sortBy: any,
   sortOrder: any,
-  userEmail: any
+  userId: any
 ) => {
   const limit = size * 1;
   const offset = (page - 1) * limit;
@@ -40,7 +40,7 @@ const getCurrentUserCart = async (
   const category = await CartModel.findAll({
     nest: true,
     where: {
-      userEmail,
+      userId,
     },
 
     order: [[sortBy, sortOrder]],
