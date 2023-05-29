@@ -74,14 +74,14 @@ const updateWishlist = async (
 };
 
 const createWishlist = async (
-  userEmail: string,
+  userId: string,
   productId: string,
   quantity: number,
   size: string,
   color: string
 ): Promise<any> => {
   const wishlist = await WishlistModel.create({
-    userEmail,
+    userId,
     productId,
     quantity,
     size,

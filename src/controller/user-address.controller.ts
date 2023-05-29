@@ -1,16 +1,11 @@
 import {
-  getAllUserAddresss,
+  getCurrentUserAddresss,
   createUserAddress,
   updateUserAddresss,
 } from "../service/user-address.service";
 
 const getAllUserAddress = async (req: any, res: any, next: any) => {
-  getAllUserAddresss(
-    req.query.page,
-    req.query.size,
-    req.query.sort,
-    req.query.order
-  )
+  getCurrentUserAddresss(req.query.id)
     .then((result) => {
       res.json(result);
       next;
@@ -23,6 +18,7 @@ const getAllUserAddress = async (req: any, res: any, next: any) => {
 const addUserAddress = async (req: any, res: any) => {
   try {
     const {
+      userId,
       address_line1,
       address_line2,
       city,
@@ -32,6 +28,7 @@ const addUserAddress = async (req: any, res: any) => {
       mobile,
     } = req.body;
     const UserAddress = await createUserAddress(
+      userId,
       address_line1,
       address_line2,
       city,
@@ -51,6 +48,7 @@ const updateUserAddress = async (req: any, res: any) => {
   try {
     const {
       id,
+      userId,
       address_line1,
       address_line2,
       city,
@@ -61,6 +59,7 @@ const updateUserAddress = async (req: any, res: any) => {
     } = req.body;
     const result = await updateUserAddresss(
       id,
+      userId,
       address_line1,
       address_line2,
       city,

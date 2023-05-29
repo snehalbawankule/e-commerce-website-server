@@ -43,9 +43,9 @@ const getAllCurrentUserWishLists = async (req: any, res: any, next: any) => {
 };
 const addWishlist = async (req: any, res: any) => {
   try {
-    const { userEmail, productId, quantity, size, color } = req.body;
+    const { userId, productId, quantity, size, color } = req.body;
     const Category = await createWishlist(
-      userEmail,
+      userId,
       productId,
       quantity,
       size,

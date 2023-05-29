@@ -5,8 +5,8 @@ import {
 } from "../controller/user-address.controller";
 
 const userAddressRoute = (app: Express) => {
-  app.get("/user-address", getAllUserAddress);
-  app.post("/user-address", addUserAddress);
+  app.get("/get-user-address", getAllUserAddress);
+  app.post("/post-user-address", addUserAddress);
 };
 
 export { userAddressRoute };

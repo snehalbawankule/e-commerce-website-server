@@ -12,6 +12,7 @@ const UserAddressModel = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
+
     address_line1: {
       type: DataTypes.STRING,
       allowNull: false,

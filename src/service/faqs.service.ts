@@ -15,6 +15,7 @@ const getFaqss = async (
     where: [
       {
         helpCenterId,
+        
       },
     ],
     order: [[sortBy, sortOrder]],

@@ -13,7 +13,7 @@ const WishlistModel = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
-    userEmail: {
+    userId: {
       type: DataTypes.STRING,
       allowNull: false,
     },

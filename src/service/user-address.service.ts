@@ -1,24 +1,20 @@
 import { UserAddressModel } from "../models/user-address.model";
-
-const getAllUserAddresss = async (
-  page: number,
-  size: number,
-  sortBy: any,
-  sortOrder: any
-) => {
-  const limit = size * 1;
-  const offset = (page - 1) * limit;
-  const UserAddress = await UserAddressModel.findAll({
+import { UserModel } from "../models/user.model";
+const getCurrentUserAddresss = async (id: any) => {
+  const UserAddress = await UserModel.findOne({
     nest: true,
-    order: [[sortBy, sortOrder]],
-    offset,
-    limit,
+    where: { id },
+    attributes: {
+      exclude: ["password"],
+    },
+    include: [{ model: UserAddressModel, nested: true }],
   });
   return UserAddress;
 };
 
 const updateUserAddresss = async (
-  id: any,
+  id: string,
+  userId: string,
   address_line1: string,
   address_line2: string,
   city: string,
@@ -29,6 +25,7 @@ const updateUserAddresss = async (
 ) => {
   const update = await UserAddressModel.update(
     {
+      userId,
       address_line1,
       address_line2,
       city,
@@ -44,6 +41,7 @@ const updateUserAddresss = async (
 };
 
 const createUserAddress = async (
+  userId: string,
   address_line1: string,
   address_line2: string,
   city: string,
@@ -53,6 +51,7 @@ const createUserAddress = async (
   mobile: Number
 ): Promise<any> => {
   const UserAddress = await UserAddressModel.create({
+    userId,
     address_line1,
     address_line2,
     city,
@@ -64,4 +63,4 @@ const createUserAddress = async (
 
   return UserAddress;
 };
-export { getAllUserAddresss, createUserAddress, updateUserAddresss };
+export { getCurrentUserAddresss, createUserAddress, updateUserAddresss };

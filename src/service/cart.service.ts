@@ -73,14 +73,14 @@ const updateCart = async (
 };
 
 const createCart = async (
-  userEmail: string,
+  userId: string,
   productId: string,
   quantity: number,
   size: string,
   color: string
 ): Promise<any> => {
   const cart = await CartModel.create({
-    userEmail,
+    userId,
     productId,
     quantity,
     size,

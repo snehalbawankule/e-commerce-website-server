@@ -43,14 +43,8 @@ const getCurrentUserCarts = async (req: any, res: any, next: any) => {
 };
 const addCart = async (req: any, res: any) => {
   try {
-    const { userEmail, productId, quantity, size, color } = req.body;
-    const Category = await createCart(
-      userEmail,
-      productId,
-      quantity,
-      size,
-      color
-    );
+    const { userId, productId, quantity, size, color } = req.body;
+    const Category = await createCart(userId, productId, quantity, size, color);
     return res.json(Category);
   } catch (error) {
     console.error(error);
