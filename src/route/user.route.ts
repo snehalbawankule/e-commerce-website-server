@@ -4,6 +4,7 @@ import {
   checkUser,
   forgetPassword,
   validateUser,
+  updateUsers,
 } from "../controller/user.controller";
 import { Express } from "express";
 
@@ -13,5 +14,6 @@ const userRoute = (app: Express) => {
   app.post("/validate-user", validateUser);
   app.post("/checkuser", checkUser);
   app.post("/forgetPassword", forgetPassword);
+  app.post("/update-user", updateUsers);
 };
 export { userRoute };

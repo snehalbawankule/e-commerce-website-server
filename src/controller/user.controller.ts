@@ -1,4 +1,9 @@
-import { getAllUsers, createUser, userCheck } from "../service/user.service";
+import {
+  getAllUsers,
+  createUser,
+  userCheck,
+  updateUser,
+} from "../service/user.service";
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
 const nodemailer = require("nodemailer");
@@ -87,4 +92,21 @@ const forgetPassword = async (req: any, res: any) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
-export { getAll, addUser, checkUser, validateUser, forgetPassword };
+const updateUsers = async (req: any, res: any) => {
+  try {
+    const { id, firstname, lastname, email } = req.body;
+    const result = await updateUser(id, firstname, lastname, email);
+    return res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+export {
+  getAll,
+  addUser,
+  checkUser,
+  validateUser,
+  forgetPassword,
+  updateUsers,
+};

@@ -28,4 +28,21 @@ const forgetPass = async (email: string) => {
   return UserModel.findOne({ where: { email } });
 };
 
-export { getAllUsers, createUser, userCheck, forgetPass };
+const updateUser = async (
+  id: any,
+  firstname: string,
+  lastname: string,
+  email: string
+) => {
+  const updatePro = await UserModel.update(
+    {
+      firstname,
+      lastname,
+      email,
+    },
+    { where: { id } }
+  );
+
+  return updatePro;
+};
+export { getAllUsers, createUser, userCheck, forgetPass, updateUser };
