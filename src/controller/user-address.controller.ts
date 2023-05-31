@@ -2,6 +2,7 @@ import {
   getCurrentUserAddresss,
   createUserAddress,
   updateUserAddresss,
+  removeUserAddress,
 } from "../service/user-address.service";
 
 const getAllUserAddress = async (req: any, res: any, next: any) => {
@@ -19,23 +20,29 @@ const addUserAddress = async (req: any, res: any) => {
   try {
     const {
       userId,
+      name,
+      mobile,
       address_line1,
       address_line2,
       city,
       postal_code,
       state,
       country,
-      mobile,
+      alternative_mobile,
+      address_type,
     } = req.body;
     const UserAddress = await createUserAddress(
       userId,
+      name,
+      mobile,
       address_line1,
       address_line2,
       city,
       postal_code,
       state,
       country,
-      mobile
+      alternative_mobile,
+      address_type
     );
     return res.json(UserAddress);
   } catch (error) {
@@ -48,25 +55,29 @@ const updateUserAddress = async (req: any, res: any) => {
   try {
     const {
       id,
-      userId,
+
+      name,
+      mobile,
       address_line1,
       address_line2,
       city,
       postal_code,
       state,
       country,
-      mobile,
+      alternative_mobile,
     } = req.body;
     const result = await updateUserAddresss(
       id,
-      userId,
+
+      name,
+      mobile,
       address_line1,
       address_line2,
       city,
       postal_code,
       state,
       country,
-      mobile
+      alternative_mobile
     );
     return res.json(result);
   } catch (error) {
@@ -74,5 +85,20 @@ const updateUserAddress = async (req: any, res: any) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
+const deleteUserAddress = async (req: any, res: any, next: any) => {
+  removeUserAddress(req.query.id)
+    .then((result) => {
+      res.json(result);
+      next;
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
+};
 
-export { getAllUserAddress, addUserAddress, updateUserAddress };
+export {
+  getAllUserAddress,
+  addUserAddress,
+  updateUserAddress,
+  deleteUserAddress,
+};

@@ -12,6 +12,14 @@ const UserAddressModel = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    mobile: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
 
     address_line1: {
       type: DataTypes.STRING,
@@ -26,7 +34,7 @@ const UserAddressModel = sequelize.define(
       allowNull: false,
     },
     postal_code: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     state: {
@@ -37,8 +45,12 @@ const UserAddressModel = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    mobile: {
-      type: DataTypes.INTEGER,
+    alternative_mobile: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    address_type: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

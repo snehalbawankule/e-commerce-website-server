@@ -14,25 +14,27 @@ const getCurrentUserAddresss = async (id: any) => {
 
 const updateUserAddresss = async (
   id: string,
-  userId: string,
+  name: string,
+  mobile: string,
   address_line1: string,
   address_line2: string,
   city: string,
-  postal_code: Number,
+  postal_code: string,
   state: string,
   country: string,
-  mobile: Number
+  alternative_mobile: string
 ) => {
   const update = await UserAddressModel.update(
     {
-      userId,
+      name,
+      mobile,
       address_line1,
       address_line2,
       city,
       postal_code,
       state,
       country,
-      mobile,
+      alternative_mobile,
     },
     { where: { id } }
   );
@@ -42,25 +44,41 @@ const updateUserAddresss = async (
 
 const createUserAddress = async (
   userId: string,
+  name: string,
+  mobile: Number,
   address_line1: string,
   address_line2: string,
   city: string,
   postal_code: Number,
   state: string,
   country: string,
-  mobile: Number
+  alternative_mobile: Number,
+  address_type: string
 ): Promise<any> => {
   const UserAddress = await UserAddressModel.create({
     userId,
+    name,
+    mobile,
     address_line1,
     address_line2,
     city,
     postal_code,
     state,
     country,
-    mobile,
+    alternative_mobile,
+    address_type,
   });
 
   return UserAddress;
 };
-export { getCurrentUserAddresss, createUserAddress, updateUserAddresss };
+
+const removeUserAddress = async (id: string): Promise<any> => {
+  const remove = await UserAddressModel.destroy({ where: { id } });
+  return remove;
+};
+export {
+  getCurrentUserAddresss,
+  createUserAddress,
+  updateUserAddresss,
+  removeUserAddress,
+};
