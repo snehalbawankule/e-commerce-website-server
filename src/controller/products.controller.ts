@@ -30,6 +30,7 @@ const getCategoryProducts = async (req: any, res: any, next: any) => {
   )
     .then((result) => {
       res.json(result);
+      console.log(req.query);
       next;
     })
     .catch((err) => {

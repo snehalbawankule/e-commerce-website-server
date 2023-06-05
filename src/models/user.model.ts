@@ -21,8 +21,8 @@ const UserModel = sequelize.define(
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING,
-      unique: true,
+      type: DataTypes.STRING(64),
+      allowNull: false,
     },
     password: {
       type: DataTypes.STRING,

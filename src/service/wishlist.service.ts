@@ -91,7 +91,7 @@ const createWishlist = async (
   return wishlist;
 };
 
-const removeWishlist = async (id: string): Promise<any> => {
+const removeWishlist = async (id: string) => {
   const user = await WishlistModel.destroy({
     where: {
       id,
