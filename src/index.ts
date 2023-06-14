@@ -7,7 +7,7 @@ import bodyParser from "body-parser";
 import { userRoute } from "./route/user.route";
 import { sequelize } from "./util/connection.util";
 import { productRoute } from "./route/products.route";
-import { commentRoute } from "./route/comments.route";
+
 import { likeRoute } from "./route/likes.route";
 import { categoryRoute } from "./route/category.route";
 import { subCategoryRoute } from "./route/sub-category.route";
@@ -19,6 +19,7 @@ import { cartRoute } from "./route/cart.route";
 import { helpCenterRoute } from "./route/helpcenter.route";
 import { faqsRoute } from "./route/faqs.route";
 import { userAddressRoute } from "./route/user-address.route";
+import { reviewsRoute } from "./route/reviews.route";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,6 +36,7 @@ subCategoryRoute(app);
 subSubCategoryRoute(app);
 cartRoute(app);
 userAddressRoute(app);
+reviewsRoute(app);
 sequelize
   .sync({ alter: true })
   .then((result) => console.log("database sync successfully"));
