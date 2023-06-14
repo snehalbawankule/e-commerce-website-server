@@ -22,7 +22,8 @@ const updateUserAddresss = async (
   postal_code: string,
   state: string,
   country: string,
-  alternative_mobile: string
+  alternative_mobile: string,
+  address_type: string
 ) => {
   const update = await UserAddressModel.update(
     {
@@ -35,6 +36,7 @@ const updateUserAddresss = async (
       state,
       country,
       alternative_mobile,
+      address_type,
     },
     { where: { id } }
   );

@@ -65,6 +65,7 @@ const updateUserAddress = async (req: any, res: any) => {
       state,
       country,
       alternative_mobile,
+      address_type,
     } = req.body;
     const result = await updateUserAddresss(
       id,
@@ -77,7 +78,8 @@ const updateUserAddress = async (req: any, res: any) => {
       postal_code,
       state,
       country,
-      alternative_mobile
+      alternative_mobile,
+      address_type
     );
     return res.json(result);
   } catch (error) {

@@ -9,7 +9,7 @@ import {
 const userAddressRoute = (app: Express) => {
   app.get("/get-user-address", getAllUserAddress);
   app.post("/post-user-address", addUserAddress);
-  app.put("/update-user-address", updateUserAddress);
+  app.post("/update-user-address", updateUserAddress);
   app.delete("/delete-user-address", deleteUserAddress);
 };
 
