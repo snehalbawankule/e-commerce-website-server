@@ -146,7 +146,8 @@ const updateProduct = async (
   category: string,
   subCategory: string,
   actualPrice: number,
-  discount: number
+  discount: number,
+  discountPrice: number
 ) => {
   const updatePro = await ProductModel.update(
     {
@@ -160,6 +161,7 @@ const updateProduct = async (
       subCategory,
       actualPrice,
       discount,
+      discountPrice,
     },
     { where: { id } }
   );
@@ -178,8 +180,10 @@ const createProduct = async (
   subCategory: string,
   sub_subCategory: string,
   actualPrice: number,
-  discount: number
+  discount: number,
+  discountPrice: number
 ): Promise<any> => {
+  // const discountPrice = actualPrice - (actualPrice * discount) / 100;
   const product = await ProductModel.create({
     name,
     title,
@@ -192,6 +196,7 @@ const createProduct = async (
     sub_subCategory,
     actualPrice,
     discount,
+    discountPrice,
   });
 
   return product;

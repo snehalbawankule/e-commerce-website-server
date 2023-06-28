@@ -11,8 +11,12 @@ const SubCategoryModel = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
+    categoryId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     name: {
-      type: DataTypes.STRING,  
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

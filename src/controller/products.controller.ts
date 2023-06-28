@@ -109,6 +109,9 @@ const addProduct = async (req: any, res: any) => {
       actualPrice,
       discount,
     } = req.body;
+    const discountPrice = actualPrice - (actualPrice * discount) / 100;
+    const productData = { ...req.body, discountPrice };
+
     const Category = await createProduct(
       name,
       title,
@@ -120,7 +123,8 @@ const addProduct = async (req: any, res: any) => {
       subCategory,
       sub_subCategory,
       actualPrice,
-      discount
+      discount,
+      discountPrice
     );
     return res.json(Category);
   } catch (error) {
@@ -143,6 +147,7 @@ const updateProducts = async (req: any, res: any) => {
       subCategory,
       actualPrice,
       discount,
+      discountPrice,
     } = req.body;
     const result = await updateProduct(
       id,
@@ -155,7 +160,8 @@ const updateProducts = async (req: any, res: any) => {
       category,
       subCategory,
       actualPrice,
-      discount
+      discount,
+      discountPrice
     );
     return res.json(result);
   } catch (error) {

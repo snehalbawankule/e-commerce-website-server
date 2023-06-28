@@ -24,6 +24,7 @@ const addSubCategory = async (req: any, res: any) => {
   try {
     const { categoryId, name } = req.body;
     const Category = await createSubCategory(categoryId, name);
+    console.log(Category);
     return res.json(Category);
   } catch (error) {
     console.error(error);
