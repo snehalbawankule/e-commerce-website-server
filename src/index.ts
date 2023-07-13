@@ -20,12 +20,14 @@ import { helpCenterRoute } from "./route/helpcenter.route";
 import { faqsRoute } from "./route/faqs.route";
 import { userAddressRoute } from "./route/user-address.route";
 import { reviewsRoute } from "./route/reviews.route";
+import { orderRoute } from "./route/order.route";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 wishlistRoute(app);
 helpCenterRoute(app);
+orderRoute(app);
 faqsRoute(app);
 userRoute(app);
 brandRoute(app);
