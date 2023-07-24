@@ -1,3 +1,4 @@
+import { ProductImagesModel } from "../models/product-images.model";
 import { ProductModel } from "../models/product.model";
 import { sequelize } from "../util/connection.util";
 const { Op } = require("sequelize");
@@ -135,6 +136,21 @@ const getProductById = async (id: any) => {
   });
   return category;
 };
+
+const getProductByIdImages = async (id: any) => {
+  const category = await ProductModel.findOne({
+    nest: true,
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: ProductImagesModel,
+      },
+    ],
+  });
+  return category;
+};
 const updateProduct = async (
   id: any,
   name: string,
@@ -210,4 +226,5 @@ export {
   getSubSubCategoryProduct,
   getSubCategoryProduct,
   getProductById,
+  getProductByIdImages,
 };

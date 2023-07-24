@@ -21,6 +21,7 @@ import { faqsRoute } from "./route/faqs.route";
 import { userAddressRoute } from "./route/user-address.route";
 import { reviewsRoute } from "./route/reviews.route";
 import { orderRoute } from "./route/order.route";
+import { productImageRoute } from "./route/product-image.route";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,6 +40,7 @@ subSubCategoryRoute(app);
 cartRoute(app);
 userAddressRoute(app);
 reviewsRoute(app);
+productImageRoute(app);
 sequelize
   .sync({ alter: true })
   .then((result) => console.log("database sync successfully"));

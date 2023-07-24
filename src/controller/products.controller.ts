@@ -7,6 +7,7 @@ import {
   getSearchedProduct,
   getSubSubCategoryProduct,
   getProductById,
+  getProductByIdImages,
 } from "../service/products.service";
 
 const getAllProducts = async (req: any, res: any, next: any) => {
@@ -39,6 +40,16 @@ const getCategoryProducts = async (req: any, res: any, next: any) => {
 };
 const getProductsById = async (req: any, res: any, next: any) => {
   getProductById(req.query.id)
+    .then((result) => {
+      res.json(result);
+      next;
+    })
+    .catch((err) => {
+      res.json({ err }).status(500);
+    });
+};
+const getProductsByIdImage = async (req: any, res: any, next: any) => {
+  getProductByIdImages(req.query.id)
     .then((result) => {
       res.json(result);
       next;
@@ -179,4 +190,5 @@ export {
   updateProducts,
   getSubSubCategoryProducts,
   getProductsById,
+  getProductsByIdImage,
 };
