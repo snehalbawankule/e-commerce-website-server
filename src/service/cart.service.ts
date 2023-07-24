@@ -52,21 +52,15 @@ const getCurrentUserCart = async (
 };
 
 const updateCart = async (
-  product_id: string,
-  userName: string,
-  quantity: number,
-  size: string,
-  color: string
+  productId: string,
+
+  quantity: number
 ) => {
   const updatePro = await CartModel.update(
     {
-      product_id,
-      userName,
       quantity,
-      size,
-      color,
     },
-    { where: { product_id } }
+    { where: { productId } }
   );
 
   return updatePro;

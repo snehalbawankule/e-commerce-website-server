@@ -1,9 +1,10 @@
 import {
   getAllOrder,
-  createOrder,
   updateOrder,
-  getCurrentUserOrder,
+  createOrder1,
+  getOrderById,
 } from "../service/orders.service";
+import { removeCarts } from "./cart.controller";
 
 const getAllOrders = async (req: any, res: any, next: any) => {
   getAllOrder(req.query.page, req.query.size, req.query.sort, req.query.order)
@@ -16,22 +17,18 @@ const getAllOrders = async (req: any, res: any, next: any) => {
     });
 };
 
-const postOrder = async (req: any, res: any) => {
+const createOrder = async (req: any, res: any) => {
   try {
-    const { userId, products, userAddressId } = req.body; // Modified to include 'products' array
-    const orders: any = []; // Array to store the created orders
+    const { userId, shippingAddress, totalCost, items } = req.body;
+    const order = await createOrder1(userId, shippingAddress, totalCost, items);
+    removeCarts(req, res, () => {
+      res.status(201).json({ message: "Order created successfully", order });
+    });
 
-    // Loop through each product in the 'products' array
-    for (const product of products) {
-      const { productId } = product;
-      const order: any = await createOrder(userId, productId, userAddressId);
-      orders.push(order);
-    }
-
-    return res.json(orders); // Sending back the array of created orders
+    // res.status(201).json({ message: "Order created successfully", order });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server Error" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -45,22 +42,17 @@ const updateOrders = async (req: any, res: any) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
-const getOrdersById = async (req: any, res: any, next: any) => {
-  console.log(req.query);
-  getCurrentUserOrder(
-    req.query.page,
-    req.query.size,
-    req.query.sort,
-    req.query.order,
-    req.query.userId
-  )
-    .then((result) => {
-      res.json(result);
-      next;
-    })
-    .catch((err) => {
-      res.json({ err }).status(500);
-    });
+const getOrderById1 = async (req: any, res: any) => {
+  console.log(req.query.userId);
+  try {
+    const orderId = req.query.userId;
+    const order = await getOrderById(orderId);
+
+    res.json(order);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
-export { getAllOrders, postOrder, updateOrders, getOrdersById };
+export { getAllOrders, createOrder, updateOrders, getOrderById1 };

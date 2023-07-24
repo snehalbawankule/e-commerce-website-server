@@ -1,6 +1,9 @@
+import { CartModel } from "../models/cart.model";
+import { OrderItemsModel } from "../models/order-items.model";
 import { OrderModel } from "../models/order.model";
 import { ProductModel } from "../models/product.model";
 import { UserAddressModel } from "../models/user-address.model";
+import { removeCart } from "./cart.service";
 
 const getAllOrder = async (
   page: number,
@@ -30,25 +33,47 @@ const updateOrder = async (id: any, name: string) => {
   return update;
 };
 
-const createOrder = async (
-  userId: string,
-  products: Array<{ productId: string }>,
-  userAddressId: string
-): Promise<any> => {
-  const orders: any = [];
+// const createOrder = async (
+//   userId: string,
+//   shippingAddress: string
+// ): Promise<any> => {
+//   const Order = await OrderModel.create(userId, shippingAddress);
+//   // const OrderDetails = await OrderDetailModel.create(order_details);
+//   return Order;
+// };
 
-  for (const product of products) {
-    const { productId } = product;
+// Create a new order
+const createOrder1 = async (
+  userId: any,
+  shippingAddress: string,
+  totalCost: any,
+  items: any
+) => {
+  try {
     const order = await OrderModel.create({
       userId,
-      productId,
-      userAddressId,
+      shippingAddress,
+      totalCost,
+      items,
     });
 
-    orders.push(order);
+    for (const item of items) {
+      const { productId, quantity } = item;
+      await OrderItemsModel.create({
+        orderId: order.dataValues.id,
+        productId,
+        quantity,
+      });
+    }
+    await CartModel.destroy({
+      where: {
+        userId,
+      },
+    });
+    return order;
+  } catch (error) {
+    throw new Error("Failed to create order");
   }
-
-  return orders;
 };
 
 const getCurrentUserOrder = async (
@@ -78,4 +103,31 @@ const getCurrentUserOrder = async (
 
   return category;
 };
-export { getAllOrder, createOrder, updateOrder, getCurrentUserOrder };
+const getOrderById = async (userId: string) => {
+  try {
+    const order = await OrderModel.findAll({
+      where: { userId },
+      include: [
+        {
+          model: OrderItemsModel,
+          include: [{ model: ProductModel }],
+        },
+      ],
+    });
+
+    if (!order) {
+      throw new Error("Order not found");
+    }
+
+    return order;
+  } catch (error) {
+    throw new Error("Failed to fetch order");
+  }
+};
+export {
+  getAllOrder,
+  createOrder1,
+  updateOrder,
+  getOrderById,
+  getCurrentUserOrder,
+};

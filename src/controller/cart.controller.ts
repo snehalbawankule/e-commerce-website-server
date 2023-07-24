@@ -54,14 +54,8 @@ const addCart = async (req: any, res: any) => {
 
 const updateCarts = async (req: any, res: any) => {
   try {
-    const { product_id, userName, quantity, size, color } = req.body;
-    const result = await updateCart(
-      product_id,
-      userName,
-      quantity,
-      size,
-      color
-    );
+    const { productId, quantity } = req.body;
+    const result = await updateCart(productId, quantity);
     return res.json(result);
   } catch (error) {
     console.error(error);
