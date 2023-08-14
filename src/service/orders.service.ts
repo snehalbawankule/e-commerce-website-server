@@ -79,8 +79,8 @@ const createOrder1 = async (
 const getCurrentUserOrder = async (
   page: number,
   size: number,
-  sortBy: any,
-  sortOrder: any,
+  sort: any,
+  order: any,
   userId: any
 ) => {
   const limit = size * 1;
@@ -92,10 +92,12 @@ const getCurrentUserOrder = async (
       userId,
     },
 
-    order: [[sortBy, sortOrder]],
+    order: [[sort, order]],
     include: [
-      { model: ProductModel, nested: true },
-      { model: UserAddressModel, nested: true },
+      {
+        model: OrderItemsModel,
+        include: [{ model: ProductModel }],
+      },
     ],
     offset,
     limit,

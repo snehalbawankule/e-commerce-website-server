@@ -73,5 +73,23 @@ const removeCarts = async (req: any, res: any, next: any) => {
       res.json({ err }).status(500);
     });
 };
+const removeCartss = async (req: any, res: any, next: any) => {
+  console.log(req.query);
+  removeCart(req.query.userId)
+    .then((result) => {
+      res.json(result);
+      next;
+    })
+    .catch((err) => {
+      res.json({ err }).status(500);
+    });
+};
 
-export { getAllCarts, addCart, getCurrentUserCarts, updateCarts, removeCarts };
+export {
+  getAllCarts,
+  addCart,
+  getCurrentUserCarts,
+  updateCarts,
+  removeCarts,
+  removeCartss,
+};

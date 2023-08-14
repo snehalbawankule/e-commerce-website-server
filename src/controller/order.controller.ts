@@ -3,8 +3,9 @@ import {
   updateOrder,
   createOrder1,
   getOrderById,
+  getCurrentUserOrder,
 } from "../service/orders.service";
-import { removeCarts } from "./cart.controller";
+import { removeCartss } from "./cart.controller";
 
 const getAllOrders = async (req: any, res: any, next: any) => {
   getAllOrder(req.query.page, req.query.size, req.query.sort, req.query.order)
@@ -21,7 +22,7 @@ const createOrder = async (req: any, res: any) => {
   try {
     const { userId, shippingAddress, totalCost, items } = req.body;
     const order = await createOrder1(userId, shippingAddress, totalCost, items);
-    removeCarts(req, res, () => {
+    removeCartss(req, res, () => {
       res.status(201).json({ message: "Order created successfully", order });
     });
 
@@ -43,12 +44,11 @@ const updateOrders = async (req: any, res: any) => {
   }
 };
 const getOrderById1 = async (req: any, res: any) => {
-  console.log(req.query.userId);
   try {
-    const orderId = req.query.userId;
-    const order = await getOrderById(orderId);
+    const { page, size, sort, order, userId } = req.query;
+    const orders = await getCurrentUserOrder(page, size, sort, order, userId);
 
-    res.json(order);
+    res.json(orders);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
